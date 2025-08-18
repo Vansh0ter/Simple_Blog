@@ -31,7 +31,7 @@ pip install --no-cache-dir -r app/requirements.txt
 uvicorn app.main:app --reload --log-config=logs/log_config.json
 ```
 
-## Example .env file
+## Example .env file(.env should be placed in the root of the application(alongside with README.MD)
 ```
 POSTGRES_USER=admin
 POSTGRES_PASSWORD=123
