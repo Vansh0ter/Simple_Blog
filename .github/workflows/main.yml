@@ -19,7 +19,7 @@ jobs:
           # --- Connection Details (from Secrets) ---
           host: ${{ secrets.SSH_HOST }}
           user: ${{ secrets.SSH_NAME }}
-          key: ${{ secrets.SSH_PASS }}
+          pass: ${{ secrets.SSH_PASS }}
 
           # --- Pipeline Commands ---
           first_ssh: |
