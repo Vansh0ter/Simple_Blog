@@ -14,7 +14,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run SSH/SCP Pipeline
-        uses: Vansh0ter/Simple_Blog@v2
         with:
           run: | 
             apt-get update && apt install -y openssh
