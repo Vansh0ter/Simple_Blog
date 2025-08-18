@@ -14,24 +14,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run SSH/SCP Pipeline
-        uses: kangketikonlen/ssh-pipeline@v0.0.3 # Use your action's repo and version
         with:
-          # --- Connection Details (from Secrets) ---
-          host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_NAME }}
-          pass: ${{ secrets.SSH_PASS }}
-
-          # --- Pipeline Commands ---
-          first_ssh: |
-            echo "Starting deployment..."
-            echo "Connected from a GitHub Actions runner!"
-
-          scp: |
-            # Copy build artifacts or other files
-            # Format: 'local/path => remote/path'
-            README.md => /tmp/
-
-          last_ssh: |
-            echo "File transfer complete."
-            echo "Verifying file on remote server:"
-            ls -l /tmp/README.md
+          run: | 
+            apt-get update && apt install -y openssh
+            ssh $SSH_USER@SSH_HOST
+            $SSH_PASS
+            mkdir test
+            exit
+            |
