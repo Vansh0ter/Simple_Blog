@@ -16,10 +16,10 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
   
         run: |
-          scp -o StrictHostKeyChecking=no -r ./ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/deployer/blogapp
+          scp -o StrictHostKeyChecking=no -r ./ ${{ secrets.SSH_NAME }}@${{ secrets.SSH_HOST }}:/home/deployer/blogapp
   
           run: |
-            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << EOF
+            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_NAME }}@${{ secrets.SSH_HOST }} << EOF
               cd /home/deployer/Simple_Blog
               docker-compose down
               git pull
