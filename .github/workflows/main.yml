@@ -18,9 +18,8 @@ jobs:
         with:
           # --- Connection Details (from Secrets) ---
           host: ${{ secrets.SSH_HOST }}
-          user: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+          user: ${{ secrets.SSH_NAME }}
+          key: ${{ secrets.SSH_PASS }}
 
           # --- Pipeline Commands ---
           first_ssh: |
