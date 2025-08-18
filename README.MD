@@ -1,11 +1,12 @@
 # Simple Blog App
 
-## Standart deployment
+## Standard deployment
 1. Clone the repo.
 2. Ensure that docker is installed on your system.
 3. Intialize PgSQL DB. 
 4. Create .env file in with keys: POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB. 
-5. ```bash
+5. 
+	```bash
 	docker-compose up --build
 	```
 6. App will be deployed momenteraly on localhost:8000 by default
