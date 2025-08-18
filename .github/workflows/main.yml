@@ -1,25 +1,38 @@
-  - name: SSH-SCP-SSH Pipeline
-  # You may pin to the exact commit or the version.
-  # uses: kangketikonlen/ssh-pipeline@44bede38524a3e12f047d7b4bed7d71280223dd3
-  uses: kangketikonlen/ssh-pipeline@44bede38524a3e12f047d7b4bed7d71280223dd3
-  with:
-    # Remote server hostname or IP address.
-    host: ${{ secret.SSH_HOST }}
-    # SSH username for the remote server.
-    user: ${{ secret.SSH_NAME }}
-    # SSH password to authenticate. (Use GitHub secrets!)
-    pass: ${{ secret.SSH_PASS}}
-    # Multiline block of files to copy. Format: 'local/path => remote/path'
-    first_ssh: |
+name: test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run SSH/SCP Pipeline
+        uses: kangketikonlen/ssh-pipeline@v0.0.3 # Use your action's repo and version
+        with:
+          # --- Connection Details (from Secrets) ---
+          host: ${{ secrets.SSH_HOST }}
+          user: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+          # --- Pipeline Commands ---
+          first_ssh: |
             echo "Starting deployment..."
             echo "Connected from a GitHub Actions runner!"
 
-    scp: |
+          scp: |
             # Copy build artifacts or other files
             # Format: 'local/path => remote/path'
             README.md => /tmp/
 
-    last_ssh: |
+          last_ssh: |
             echo "File transfer complete."
             echo "Verifying file on remote server:"
             ls -l /tmp/README.md
