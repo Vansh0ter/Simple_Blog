@@ -38,7 +38,7 @@ curl -X GET yourhostname:8000/posts
 ```
 To make a new one:
 ```
-curl -X POST curl -X POST yourhostname:8000/posts \
+curl -X POST yourhostname:8000/posts \
   -H "Content-Type: application/json" \
   -d '{"title": "Another post", "content": "Some content here"}'
 ```
