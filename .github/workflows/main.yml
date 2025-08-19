@@ -11,14 +11,21 @@ jobs:
     steps:
     - uses: actions/checkout@v5
 
-    - uses: webfactory/ssh-agent@v0.9.0
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-  
-        run: |
-            ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_NAME }}@${{ secrets.SSH_HOST }} << EOF
-              cd /home/deployer/Simple_Blog
-              docker-compose down
-              git pull
-              docker-compose up --build
-            EOF
+
+    - name: ssh key
+      uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    
+    - name: copy
+      run: |
+        scp -o StrictHostKeyChecking=no -r ./ ${{ secrets.SSH_NAME }}@${{ secrets.SSH_HOST }}:/home/deployer/blogapp
+
+    - name: update
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_NAME }}@${{ secrets.SSH_HOST }} << EOF
+          cd /home/deployer/Simple_Blog
+          docker-compose down
+          git pull
+          docker-compose up --build
+        EOF
