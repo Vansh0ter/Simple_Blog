@@ -30,6 +30,19 @@ pip install --no-cache-dir -r app/requirements.txt
 uvicorn app.main:app --reload --log-config=logs/log_config.json
 ```
 
+## Usage
+Once succesfully deployed, you can interact with the application via simple GET/POST requests.
+To show all posts:
+```bash
+curl -X GET yourhostname:8000/posts
+```
+To make a new one:
+```
+curl -X POST curl -X POST yourhostname:8000/posts \
+  -H "Content-Type: application/json" \
+  -d '{"title": "Another post", "content": "Some content here"}'
+```
+
 ## Example .env file(.env should be placed in the root of the application(alongside with README.MD)
 ```
 POSTGRES_USER=admin
