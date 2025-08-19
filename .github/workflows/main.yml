@@ -16,10 +16,6 @@ jobs:
       uses: webfactory/ssh-agent@v0.9.0
       with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    
-    - name: copy
-      run: |
-        scp -o StrictHostKeyChecking=no -r ./ ${{ secrets.SSH_NAME }}@${{ secrets.SSH_HOST }}:/home/deployer/Simple_Blog
 
     - name: update
       run: |
